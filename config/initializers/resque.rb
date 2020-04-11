@@ -11,5 +11,5 @@ require 'resque/failure/redis'
   Resque::Plugins::Status::Hash.expire_in = (24 * 60 * 60) # 24hrs in seconds
 
 
-Resque::Failure::Multiple.classes = [Resque::Failure::Redis, Resque::Failure::Airbrake]
+Resque::Failure::Multiple.classes = [Resque::Failure::Redis]
 Resque::Failure.backend = Resque::Failure::Multiple
