@@ -1,4 +1,6 @@
 class Keyword < ApplicationRecord
+
+  belongs_to :search
   #after_create :process_children
 
   #def process_children
