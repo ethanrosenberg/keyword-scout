@@ -1,5 +1,9 @@
 ActiveAdmin.register Search do
 
+
+
+  permit_params :keyword
+
   form do |f|
     f.inputs "Search" do
       f.input :keyword,  :as    => :string, :label => "Keyword", :hint => 'Enter keyword'
@@ -7,7 +11,7 @@ ActiveAdmin.register Search do
     f.actions
   end
 
-  #permit_params :keyword
+
 
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
