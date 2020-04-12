@@ -22,6 +22,22 @@ ActiveAdmin.register Search do
   end
 
 
+  controller do
+      def create
+
+        @search = Search.new(status: 'working', results: 0)
+
+        respond_to do |format|
+          if @search.save
+            format.html { redirect_to '/admin/searches', notice: 'Scraping job was started.' }
+          else
+            STDERR.puts @search.errors.to_yaml
+            format.html { render action: "new" }
+          end
+        end
+      end
+
+  end
 
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters

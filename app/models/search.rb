@@ -3,11 +3,7 @@ class Search < ApplicationRecord
   after_create :start_job
 
   def start_job
-
-    self.update(status: "working")
     Resque.enqueue(Runner::Scrape, self.id, self.keyword)
-
-
   end
 
   def stop_job
