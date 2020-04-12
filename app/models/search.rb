@@ -23,6 +23,7 @@ class Search < ApplicationRecord
 
     first_results.each do |keyword|
        alphabet.each do |letter|
+
          self.keywords.create(keyword: "#{keyword} #{letter}", status: 'ready')
        end
     end
