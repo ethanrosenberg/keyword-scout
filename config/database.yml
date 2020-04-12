@@ -7,8 +7,10 @@ default: &default
   timeout: 5000
   host: <%= ENV['POSTGRES_HOST'] %>
 development:
-  <<: *default
-  database: <%= ENV['POSTGRES_DB'] %>
+  adapter: postgresql
+  encoding: unicode
+  database: keyword-scout_development
+  password: <%= ENV['KEYWORD-SCOUT_DATABASE_PASSWORD'] %>
 test:
   <<: *default
   database: <%= ENV['POSTGRES_TEST_DB'] %>
