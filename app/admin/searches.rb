@@ -25,8 +25,6 @@ ActiveAdmin.register Search do
   controller do
       def create
 
-        byebug
-
         @search = Search.new(status: 'working', keyword: params[:search][:keyword], results: 0)
 
         respond_to do |format|
