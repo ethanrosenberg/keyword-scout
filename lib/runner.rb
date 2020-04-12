@@ -43,7 +43,7 @@ module Runner
     def process_results(results)
         results.each do |res|
           if !keyword_already_exists?(res)
-            @search.keywords.create(keyword: res, type: 'result')
+            @search.keywords.create(keyword: res, keyword_type: 'result')
           end
         end
         @search.update(results_count: @search.keywords.count)
