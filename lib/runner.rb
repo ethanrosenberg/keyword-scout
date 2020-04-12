@@ -25,6 +25,7 @@ module Runner
 
 
       @search.update(status: "finished", results_count: @search.keywords.count)
+      update_progress
     end
 
     def search_first_level
@@ -75,7 +76,7 @@ module Runner
     end
 
     def update_progress
-      ActionCable.server.broadcast 'web_notifications_channel', id: @search.id, results: @search.keywords.count
+      ActionCable.server.broadcast 'web_notifications_channel', id: @search.id, results: @search.keywords.count, status: @search.status
     end
 
 
