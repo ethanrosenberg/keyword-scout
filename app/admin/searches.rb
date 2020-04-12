@@ -25,7 +25,9 @@ ActiveAdmin.register Search do
   controller do
       def create
 
-        @search = Search.new(status: 'working', results: 0)
+        byebug
+
+        @search = Search.new(status: 'working', keyword: params[:search][:keyword], results: 0)
 
         respond_to do |format|
           if @search.save
