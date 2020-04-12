@@ -18,19 +18,19 @@ class Search < ApplicationRecord
 
   def build_searches
 
-    queries = []
     alphabet = ('a'..'z').to_a
     first_results = Instant::Request.new(self.keyword).get
 
     first_results.each do |keyword|
        alphabet.each do |letter|
-         queries << "#{keyword} #{letter}"
+         self.keywords.create(keyword: "#{keyword} #{letter}", status: 'ready')
        end
     end
 
-    queries.each {|kw| Resque.enqueue(Runner::Scrape, self.id, kw) }
+  end
 
-
+  def mark_finished
+    self.update(status: 'finished')
   end
 
 

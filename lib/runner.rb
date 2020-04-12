@@ -4,14 +4,15 @@ module Runner
 
     @queue = :keywords
 
-    def initialize(id, base)
+    def initialize(id, keyword_id, base)
       @base = base
       @search = Search.find(id)
+      @keyword = Keyword.find(keyword_id)
 
     end
 
-    def self.perform(id, base)
-      Runner::Scrape.new(id, base).start
+    def self.perform(id, keyword_id, base)
+      Runner::Scrape.new(id, keyword_id, base).start
     end
 
     def start
@@ -21,6 +22,7 @@ module Runner
         search_keyword
 
         @search.update(results_count: @search.keywords.count)
+        @keyword.update(status: "done")
         update_progress
 
       end
@@ -41,7 +43,7 @@ module Runner
     def process_results(results)
         results.each do |res|
           if !keyword_already_exists?(res)
-            @search.keywords.create(keyword: res)
+            @search.keywords.create(keyword: res, status: 'result')
           end
         end
         @search.update(results_count: @search.keywords.count)
