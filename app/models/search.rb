@@ -18,7 +18,7 @@ class Search < ApplicationRecord
 
   def build_searches
 
-    @queries = []
+    queries = []
     alphabet = ('a'..'z').to_a
     first_results = Instant::Request.new(self.keyword).get
 
