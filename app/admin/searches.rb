@@ -14,6 +14,13 @@ ActiveAdmin.register Search do
      link_to 'Workers', '/admin/resque_web'
   end
 
+  member_action :stop, method: :get do
+
+    Search.find(params[:id).stop_job
+
+    redirect_to '/admin/searches', notice: 'Scraping job was stopped.'
+  end
+
 
 
   # See permitted parameters documentation:
@@ -46,6 +53,13 @@ ActiveAdmin.register Search do
     column "Keyword", :keyword
     column "Results", :results_count
     column "Status", :status
+    column "Stop Search" do |job|
+      if job.status == 'finished' || job.status == 'stopped'
+        'Done'
+      else
+        link_to "Stop", "/admin/searches/#{job.id}/stop/"
+      end
+    end
 
     column "Created At" do |search|
     #local_time()
