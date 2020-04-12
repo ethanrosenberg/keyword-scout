@@ -1,7 +1,5 @@
 ActiveAdmin.register Search do
 
-
-
   permit_params :keyword
 
   form do |f|
@@ -33,6 +31,9 @@ ActiveAdmin.register Search do
   #   permitted
   # end
 
+
+
+
   index do
     column "id", :id
     column "Run Time" do |job|
@@ -51,8 +52,16 @@ ActiveAdmin.register Search do
       search.created_at
       #report.created_at.in_time_zone('Pacific Time (US & Canada)').strftime("%B %d, %Y %l:%M %p")
     end
+
+
+
+
+
     #column "Report Created", time.:created_at
 
   end
+
+
+
 
 end

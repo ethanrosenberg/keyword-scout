@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   mount ResqueWeb::Engine => "admin/resque_web"
   root :to => redirect('/admin')
 
+
+
   get 'searches/search'
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
@@ -18,6 +20,8 @@ Rails.application.routes.draw do
     get '/api/v1/beta', to: 'test#beta'
 
     get '/test', to: 'test#start'
+
+
 
 
 end
