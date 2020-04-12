@@ -29,7 +29,7 @@ module Runner
 
 
     def search_keyword
-      results = Instant::Request.new("#{keyword} #{letter}").get
+      results = Instant::Request.new(@base).get
       process_results(results)
 
       sleep = rand(0.2..0.5)
