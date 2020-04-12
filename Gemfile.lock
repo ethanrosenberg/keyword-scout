@@ -130,6 +130,9 @@ GEM
       activesupport (>= 4.1)
     hashie (3.6.0)
     highline (2.0.3)
+    httparty (0.18.0)
+      mime-types (~> 3.0)
+      multi_xml (>= 0.5.2)
     i18n (1.8.2)
       concurrent-ruby (~> 1.0)
     inherited_resources (1.11.0)
@@ -154,6 +157,7 @@ GEM
       rails-dom-testing (>= 1, < 3)
       railties (>= 4.2.0)
       thor (>= 0.14, < 2.0)
+    json (2.3.0)
     jwt (2.2.1)
     kaminari (1.2.0)
       activesupport (>= 4.1.0)
@@ -188,6 +192,9 @@ GEM
     marcel (0.3.3)
       mimemagic (~> 0.3.2)
     method_source (1.0.0)
+    mime-types (3.3.1)
+      mime-types-data (~> 3.2015)
+    mime-types-data (3.2019.1009)
     mimemagic (0.3.4)
     mini_mime (1.0.2)
     mini_portile2 (2.4.0)
@@ -252,6 +259,11 @@ GEM
       activesupport (>= 5.2.1)
       i18n
       polyamorous (= 2.3.2)
+    raygun4ruby (3.2.1)
+      concurrent-ruby
+      httparty (> 0.13.7)
+      json
+      rack
     rb-fsevent (0.10.3)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
@@ -395,6 +407,7 @@ DEPENDENCIES
   puma (~> 3.11)
   rack-cors
   rails (~> 5.2.4, >= 5.2.4.2)
+  raygun4ruby
   redis
   resque
   resque-status
