@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_12_222218) do
+ActiveRecord::Schema.define(version: 2020_04_12_233508) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(version: 2020_04_12_222218) do
     t.bigint "search_id"
     t.string "keyword"
     t.string "status"
+    t.string "keyword_type"
     t.index ["search_id"], name: "index_keywords_on_search_id"
   end
 
