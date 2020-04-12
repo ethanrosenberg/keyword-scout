@@ -24,7 +24,7 @@ class Search < ApplicationRecord
     first_results.each do |keyword|
        alphabet.each do |letter|
 
-         self.keywords.create(keyword: "#{keyword} #{letter}", status: 'ready')
+         self.keywords.create(keyword: "#{keyword} #{letter}", status: 'ready', type: 'query')
        end
     end
 
@@ -32,6 +32,7 @@ class Search < ApplicationRecord
 
   def mark_finished
     self.update(status: 'finished')
+    update_progress
   end
 
 
@@ -42,6 +43,10 @@ class Search < ApplicationRecord
 
   def updated_at
     self[:updated_at].in_time_zone('Pacific Time (US & Canada)').strftime("%B %d, %Y %l:%M %p")
+  end
+
+  def update_progress
+    ActionCable.server.broadcast 'web_notifications_channel', id: self.id, results: self.keywords.count, status: self.status
   end
 
 end
