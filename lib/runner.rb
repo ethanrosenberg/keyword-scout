@@ -7,8 +7,6 @@ module Runner
     def initialize(id, base)
       @base = base
       @search = Search.find(id)
-      @alphabet = ('a'..'z').to_a
-      @rough_time = 0
 
     end
 
@@ -17,56 +15,25 @@ module Runner
     end
 
     def start
-      @search.update(status: "working", results_count: 0)
 
-      unless @search.status == 'stopped'
+      unless @search.status == 'stopped' || @search.status == 'finished'
 
-        search_first_level
+        search_keyword
 
-        search_second_level
-
-      end
-
-
-      @search.update(status: "finished", results_count: @search.keywords.count)
-      update_progress
-    end
-
-    def search_first_level
-
-      unless @search.status == 'stopped'
-
-        @first_results = Instant::Request.new(@base).get
-        process_results(@first_results)
+        @search.update(results_count: @search.keywords.count)
+        update_progress
 
       end
 
     end
 
-    def search_second_level
 
-      #@rough_time = (@search.keywords.count * 26) * 5
+    def search_keyword
+      results = Instant::Request.new("#{keyword} #{letter}").get
+      process_results(results)
 
-      #first_keywords = @search.keywords
-
-       @first_results.each do |keyword|
-
-          #search each keyword + 'a', 'b', etc...
-          @alphabet.each do |letter|
-
-
-
-            #search keyword + 'a' or whatever letter
-              results = Instant::Request.new("#{keyword} #{letter}").get
-              process_results(results)
-
-              sleep = rand(0.2..0.5)
-              sleep sleep
-
-
-          end
-        end
-
+      sleep = rand(0.2..0.5)
+      sleep sleep
     end
 
 
