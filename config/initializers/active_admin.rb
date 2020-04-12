@@ -6,6 +6,9 @@ ActiveAdmin.setup do |config|
   #
   config.site_title = "Keyword Scout"
 
+  config.register_javascript 'cable.js'
+  config.register_javascript 'page'
+
   # Set the link url for the title. For example, to take
   # users to your main site. Defaults to no link.
   #

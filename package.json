@@ -2,6 +2,7 @@
   "name": "keyword-scout",
   "private": true,
   "dependencies": {
+    "jquery": "^3.5.0",
     "react-d3-tree": "^1.16.1"
   }
 }

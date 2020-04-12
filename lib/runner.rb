@@ -1,7 +1,8 @@
 module Runner
+
   class Scrape
 
-    @queue = :keywords_queue
+    @queue = :keywords
 
     def initialize(id, base)
       @base = base
@@ -16,13 +17,14 @@ module Runner
     end
 
     def start
+      @search.update(status: "working", results_count: 0)
 
       search_first_level
 
       search_second_level
 
 
-      @search.update(status: "finished")
+      @search.update(status: "finished", results_count: @search.keywords.count)
     end
 
     def search_first_level
@@ -65,10 +67,15 @@ module Runner
           end
         end
         @search.update(results_count: @search.keywords.count)
+        update_progress
     end
 
     def keyword_already_exists?(kw)
       @search.keywords.where(:keyword => kw).blank? ? false : true
+    end
+
+    def update_progress
+      ActionCable.server.broadcast 'web_notifications_channel', id: @search.id, results: @search.keywords.count
     end
 
 
