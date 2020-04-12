@@ -30,8 +30,12 @@ module Runner
 
     def search_first_level
 
-      @first_results = Instant::Request.new(@base).get
-      process_results(@first_results)
+      unless @search.status == 'stopped'
+
+        @first_results = Instant::Request.new(@base).get
+        process_results(@first_results)
+
+      end
 
     end
 
@@ -46,14 +50,16 @@ module Runner
           #search each keyword + 'a', 'b', etc...
           @alphabet.each do |letter|
 
+            unless @search.status == 'stopped'
 
+            #search keyword + 'a' or whatever letter
+              results = Instant::Request.new("#{keyword} #{letter}").get
+              process_results(results)
 
-          #search keyword + 'a' or whatever letter
-            results = Instant::Request.new("#{keyword} #{letter}").get
-            process_results(results)
-
-            sleep = rand(0.2..0.5)
-            sleep sleep
+              sleep = rand(0.2..0.5)
+              sleep sleep
+            end
+            
           end
         end
 
