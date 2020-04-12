@@ -9,7 +9,7 @@ class Search < ApplicationRecord
   def stop_job
     if self.status != 'finished'
       Resque::Job.destroy(Runner::Scrape, self.id)
-      self.update(status: 'finished')
+      self.update(status: 'stopped')
     end
   end
 

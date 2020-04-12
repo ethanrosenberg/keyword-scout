@@ -19,9 +19,13 @@ module Runner
     def start
       @search.update(status: "working", results_count: 0)
 
-      search_first_level
+      unless @search.status == 'stopped'
 
-      search_second_level
+        search_first_level
+
+        search_second_level
+
+      end
 
 
       @search.update(status: "finished", results_count: @search.keywords.count)
@@ -50,7 +54,7 @@ module Runner
           #search each keyword + 'a', 'b', etc...
           @alphabet.each do |letter|
 
-            unless @search.status == 'stopped'
+
 
             #search keyword + 'a' or whatever letter
               results = Instant::Request.new("#{keyword} #{letter}").get
@@ -58,8 +62,8 @@ module Runner
 
               sleep = rand(0.2..0.5)
               sleep sleep
-            end
-            
+
+
           end
         end
 
