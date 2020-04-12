@@ -16,7 +16,7 @@ ActiveAdmin.register Search do
 
   member_action :stop, method: :get do
 
-    Search.find(params[:id).stop_job
+    Search.find(params[:id]).stop_job
 
     redirect_to '/admin/searches', notice: 'Scraping job was stopped.'
   end
