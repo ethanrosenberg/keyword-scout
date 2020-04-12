@@ -11,7 +11,7 @@ class Keyword < ApplicationRecord
 
   def start_job
 
-    Resque.enqueue(Runner::Scrape, self.search.id, self.id, self.keyword)
+    Resque.enqueue(Runner::Scrape, self.search.id, self.id, self.keyword) if self.status != 'result'
       #queries.each {|kw| Resque.enqueue(Runner::Scrape, self.id, kw) }
   end
 
