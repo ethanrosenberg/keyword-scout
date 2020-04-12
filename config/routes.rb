@@ -2,7 +2,7 @@ require "resque_web"
 
 Rails.application.routes.draw do
 
-  mount ResqueWeb::Engine => "/resque_web"
+  mount ResqueWeb::Engine => "admin/resque_web"
   root :to => redirect('/admin')
 
   get 'searches/search'

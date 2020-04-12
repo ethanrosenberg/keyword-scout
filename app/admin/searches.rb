@@ -12,6 +12,11 @@ ActiveAdmin.register Search do
   end
 
 
+  action_item :view_site do
+     link_to 'Workers', '/admin/resque_web'
+  end
+
+
 
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters

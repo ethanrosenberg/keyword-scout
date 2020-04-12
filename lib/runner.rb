@@ -64,6 +64,7 @@ module Runner
             @search.keywords.create(keyword: res)
           end
         end
+        @search.update(results_count: @search.keywords.count)
     end
 
     def keyword_already_exists?(kw)
