@@ -37,6 +37,19 @@ class Search < ApplicationRecord
     self.update(status: 'finished')
   end
 
+  def self.generate_report(id)
+    results = Search.find(params[:id]).keywords[0..10]
+
+    wb = xlsx_package.workbook
+      wb.add_worksheet(name: "Buttons") do |sheet|
+        results.each do |button|
+          sheet.add_row [button.keyword]
+        end
+      end
+
+      wb
+    end
+
 
 
   def created_at

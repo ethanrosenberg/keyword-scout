@@ -1,0 +1,10 @@
+wb = xlsx_package.workbook
+
+wb.add_worksheet(name: "Items") do |sheet|
+  # Create the header row
+  sheet.add_row ["Keyword"]
+  # Create entries for each item
+  @items.each do |item|
+    sheet.add_row [item.keyword]
+  end
+end

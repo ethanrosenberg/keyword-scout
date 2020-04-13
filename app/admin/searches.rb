@@ -37,6 +37,8 @@ ActiveAdmin.register Search do
         end
       end
 
+
+
   end
 
   # See permitted parameters documentation:
@@ -53,6 +55,18 @@ ActiveAdmin.register Search do
   #   permitted << :other if params[:action] == 'create' && current_user.admin?
   #   permitted
   # end
+  member_action :smart, :method => :get do
+
+      @items = Search.find(params[:id]).keywords[0..10]
+      respond_to do |format|
+        format.xlsx {
+          response.headers['Content-Disposition'] = 'attachment; filename="report.xlsx"'
+        }
+
+        render xlsx: "temp", template: 'searches/temp'
+
+      end
+  end
 
 
 
@@ -74,6 +88,14 @@ ActiveAdmin.register Search do
         'Done'
       else
         link_to "Stop", "/admin/searches/#{job.id}/stop/"
+      end
+    end
+    column "Reports" do |job|
+      if job.status == 'finished'
+        link_to "Download Report", "/admin/searches/#{job.id}/smart.xlsx"
+        #link_to 'Download as Excel', admin_searches_path(format: :xlsx)
+      else
+        "Waiting"
       end
     end
 

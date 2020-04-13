@@ -20,6 +20,10 @@ gem 'active_admin_theme'
 gem 'formadmin'
 gem 'raygun4ruby'
 
+gem 'caxlsx'
+gem 'rubyzip', '>= 1.2.1'
+gem 'caxlsx_rails'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.4', '>= 5.2.4.2'
 # Use postgresql as the database for Active Record
