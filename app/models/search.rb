@@ -1,6 +1,7 @@
 class Search < ApplicationRecord
   has_many :keywords
   after_create :start_job
+  after_commit :update_progress
 
   def start_job
     #Resque.enqueue(Runner::Scrape, self.id, self.keyword)
