@@ -46,7 +46,6 @@ module Runner
           end
         end
 
-        update_progress
     end
 
     def keyword_already_exists?(kw)
