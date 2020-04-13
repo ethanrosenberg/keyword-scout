@@ -24,7 +24,7 @@ class Search < ApplicationRecord
 
   #  first_results.each {|first| self.keywords.create(keyword: first, status: 'done', keyword_type: 'query')}
 
-    first_results.each do |keyword|
+    first_results[0..2].each do |keyword|
        alphabet.each do |letter|
 
          self.keywords.create(keyword: "#{keyword} #{letter}", status: 'ready', keyword_type: 'query')
@@ -35,7 +35,6 @@ class Search < ApplicationRecord
 
   def mark_finished
     self.update(status: 'finished')
-    update_progress
   end
 
 

@@ -21,10 +21,6 @@ module Runner
 
         search_keyword
 
-        @search.update(results_count: @search.keywords.count)
-        @keyword.update(status: "done")
-        update_progress
-
       end
 
     end
@@ -33,6 +29,9 @@ module Runner
     def search_keyword
       results = Instant::Request.new(@base).get
       process_results(results)
+
+      @search.update(results_count: @search.keywords.count)
+      @keyword.update(status: "done")
 
       sleep = rand(0.2..0.5)
       sleep sleep
@@ -46,7 +45,7 @@ module Runner
             @search.keywords.create(keyword: res, keyword_type: 'result')
           end
         end
-        @search.update(results_count: @search.keywords.count)
+
         update_progress
     end
 
@@ -54,9 +53,6 @@ module Runner
       @search.keywords.where(:keyword => kw).blank? ? false : true
     end
 
-    def update_progress
-      ActionCable.server.broadcast 'web_notifications_channel', id: @search.id, results: @search.keywords.count, status: @search.status
-    end
 
 
 
