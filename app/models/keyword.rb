@@ -34,4 +34,4 @@ class Keyword < ApplicationRecord
 end
 
 #Keyword.where("search_id = ? AND status = ?", 21, 'ready').count
-#Keyword.where(search_id: 21, status: 'ready', keyword_type: 'query').count
+#Keyword.where(search_id: 23, status: 'ready', keyword_type: 'query').count
