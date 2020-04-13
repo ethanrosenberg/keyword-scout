@@ -21,6 +21,8 @@ class Search < ApplicationRecord
     alphabet = ('a'..'z').to_a
     first_results = Instant::Request.new(self.keyword).get
 
+  #  first_results.each {|first| self.keywords.create(keyword: first, status: 'done', keyword_type: 'query')}
+
     first_results.each do |keyword|
        alphabet.each do |letter|
 

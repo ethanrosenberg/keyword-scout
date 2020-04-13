@@ -16,7 +16,9 @@ class Keyword < ApplicationRecord
   end
 
   def check_for_finish
-    if Keyword.where("search_id = ? AND status = ?", self.search.id, 'ready').count == 0
+    #Keyword.where(search_id: 21, status: 'ready', keyword_type: 'query').count
+    #if Keyword.where("search_id = ? AND status = ?", self.search.id, 'ready').count == 0
+    if Keyword.where(search_id: self.search.id, status: 'ready', keyword_type: 'query').count == 0
       self.search.mark_finished
     end
   end
@@ -30,3 +32,6 @@ class Keyword < ApplicationRecord
   end
 
 end
+
+#Keyword.where("search_id = ? AND status = ?", 21, 'ready').count
+#Keyword.where(search_id: 21, status: 'ready', keyword_type: 'query').count
